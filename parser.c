@@ -32,28 +32,6 @@ bool	numeric(char *ar)
 	return (1);
 }
 
-long	ft_atoi(char *str)
-{
-	int	i;
-	int	sign;
-	long	num;
-
-	i = 0;
-	sign = 1;
-	num = 0;
-	if (str[i] == '-')
-	{
-		sign = -1;
-		i++;
-	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		num = num * 10 + str[i] - '0';
-		i++;
-	}
-	return (sign * num);
-}
-
 bool	unique(int num, t_list *stack)
 {
 	if (stack == NULL)
@@ -67,12 +45,29 @@ bool	unique(int num, t_list *stack)
 	return (1);
 }
 
+int	get_idx(int num, t_list *stack)
+{
+	int	idx;
+
+	idx = 1;
+	while (stack)
+	{
+		if (num == stack->data)
+			return (0);
+		if (num > stack->data)
+			idx++;
+		if (num < stack->data)
+			stack->idx++;
+		stack = stack->next;
+	}
+	return (idx);
+}
+
 bool	get_num(char *ar, t_list **stack)
 {
 	long	num;
 	t_list	*new;
 
-	num = 0;
 	new = NULL;
 	if (!numeric(ar))
 		return (0);
@@ -85,6 +80,7 @@ bool	get_num(char *ar, t_list **stack)
 	if (!new)
 		return (0);
 	new->data = (int)num;
+	new->idx = get_idx((int)num, *stack);
 	new->next = NULL;
 	new->last = ft_lstlast(*stack);
 	if (*stack == NULL)
@@ -109,33 +105,4 @@ bool	parser(char **argv, t_list **stack_a)
 		i++;
 	}
 	return (1);
-}
-
-int	main(int argc, char **argv)
-{
-	t_list	*stack_a;
-
-	stack_a = NULL;
-	if (argc < 2)
-	{
-		printf("No data to sort. Exit.\n");
-		return (-1);
-	}
-	if (!parser(argv, &stack_a))
-	{
-		printf("Invalid list of data. Exit.\n");
-		return (-1);
-	}
-	while (stack_a)
-	{
-		printf("%d\n", stack_a->data);
-		stack_a = stack_a->next;
-	}
-	free_stack(&stack_a);
-	// iterate argv, check data, create the stack a along the way
-	// once meeting a wrong data, free the list and print Error
-	// when stack a is ok, start to sort
-	// sorter(stack_a); // return the push swap instructions list
-	// print the push swap instructions list
-	return (0);
 }

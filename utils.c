@@ -25,6 +25,28 @@ bool	ft_strchr(const char *s, char c)
 	return (0);
 }
 
+long	ft_atoi(char *str)
+{
+	int	i;
+	int	sign;
+	long	num;
+
+	i = 0;
+	sign = 1;
+	num = 0;
+	if (str[i] == '-')
+	{
+		sign = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		num = num * 10 + str[i] - '0';
+		i++;
+	}
+	return (sign * num);
+}
+
 t_list	*ft_lstlast(t_list *lst)
 {
 	if (!lst)

@@ -21,6 +21,7 @@
 typedef struct s_list
 {
 	int		data;
+	int		idx;
 	struct s_list	*last;
 	struct s_list	*next;
 }			t_list;
