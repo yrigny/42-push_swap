@@ -6,7 +6,7 @@
 /*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:24:00 by yrigny            #+#    #+#             */
-/*   Updated: 2023/12/18 16:55:16 by yrigny           ###   ########.fr       */
+/*   Updated: 2023/12/20 15:59:49 by yrigny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,17 @@ void	free_stack(t_list **stack)
 		free(*stack);
 		*stack = tmp;
 	}
+	return ;
+}
+
+void	free_argv(char **argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[i])
+		i++;
+	while (i-- >= 0)
+		free(argv[i]);
+	free(argv);
 }

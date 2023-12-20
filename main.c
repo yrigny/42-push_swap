@@ -3,22 +3,20 @@
 int	main(int argc, char **argv)
 {
 	t_list	*stack_a;
+	t_list	*tmp;
 
 	stack_a = NULL;
 	if (argc < 2)
+		return (0);
+	if (argc == 2)
+		argv = ft_split(argv[1], ' ');
+	if (!parser(argc, argv, &stack_a))
+		return (0 * printf("Error\n"));
+	tmp = stack_a;
+	while (tmp)
 	{
-		printf("No data to sort. Exit.\n");
-		return (-1);
-	}
-	if (!parser(argv, &stack_a))
-	{
-		printf("Invalid list of data. Exit.\n");
-		return (-1);
-	}
-	while (stack_a)
-	{
-		printf("%d %d\n", stack_a->data, stack_a->idx);
-		stack_a = stack_a->next;
+		printf("%d %d\n", tmp->data, tmp->idx);
+		tmp = tmp->next;
 	}
 	free_stack(&stack_a);
 	// iterate argv, check data, create the stack a along the way
