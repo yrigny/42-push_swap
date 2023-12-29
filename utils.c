@@ -27,8 +27,8 @@ bool	ft_strchr(const char *s, char c)
 
 long	ft_atoi(char *str)
 {
-	int	i;
-	int	sign;
+	int		i;
+	int		sign;
 	long	num;
 
 	i = 0;

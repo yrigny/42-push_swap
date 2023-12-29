@@ -40,6 +40,6 @@ void	rotate_down(t_list **stack)
 	(*stack)->last = ft_lstlast(*stack);
 	(*stack)->last->next = *stack;
 	*stack = (*stack)->last;
-	(*stack)->last = NULL;;
+	(*stack)->last = NULL;
 	ft_lstlast(*stack)->next = NULL;
 }

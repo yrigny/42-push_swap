@@ -20,11 +20,11 @@
 
 typedef struct s_list
 {
-	int		data;
-	int		idx;
+	int				data;
+	int				idx;
 	struct s_list	*last;
 	struct s_list	*next;
-}			t_list;
+}					t_list;
 
 bool	parser(int argc, char **argv, t_list **stack_a);
 bool	get_num(char *ar, t_list **stack);
@@ -36,5 +36,9 @@ t_list	*ft_lstlast(t_list *lst);
 void	free_stack(t_list **stack);
 char	**ft_split(char const *s, char c);
 void	free_argv(char **argv);
+int		stacklen(t_list *stack);
+int		max2(int a, int b);
+int		min4(int a, int b, int c, int d);
+int		get_pushcost(int ra, int rb, t_list *stack_a, t_list *stack_b);
 
 #endif
