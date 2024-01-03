@@ -34,7 +34,7 @@ typedef struct s_cost
 	int	times_rb;
 	int	times_rrr;
 	int	times_rra;
-	int times_rrb;
+	int	times_rrb;
 }		t_cost;
 
 /* parsing */
@@ -48,7 +48,7 @@ bool	numeric(char *ar);
 /* sorting */
 void	sorter(t_list **stack_a, int stacksize);
 void	a_to_b(t_list **stack_a, t_list **stack_b, int *b_min, int *b_max);
-void	sort_three(stack_a);
+void	sort_three(t_list **stack_a, int stacksize);
 void	b_to_a(t_list **stack_a, t_list **stack_b);
 t_cost	get_cheapest(t_list *stack_a, t_list *stack_b, int b_min, int b_max);
 int		get_rb_needed(t_list *stack_a, t_list *stack_b, int b_min, int b_max);
@@ -65,8 +65,8 @@ int		min2(int a, int b);
 int		get_pushcost(int ra, int rb, t_list *stack_a, t_list *stack_b);
 void	cost_initiate(t_cost *cost);
 void	cost_optimize(t_cost *cost, int mincost, int rra, int rrb);
-void    sort_three(t_list **stack, int stacksize);
-bool    order_ok(t_list *stack);
+void	sort_three(t_list **stack, int stacksize);
+bool	order_ok(t_list *stack);
 
 /* movements */
 void	swap(t_list **stack);

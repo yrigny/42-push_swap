@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/03 23:36:40 by yrigny            #+#    #+#             */
+/*   Updated: 2024/01/03 23:36:42 by yrigny           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	stacklen(t_list *stack)
@@ -32,8 +44,8 @@ int	min2(int a, int b)
 int	get_pushcost(int ra, int rb, t_list *stack_a, t_list *stack_b)
 {
 	int	rra;
-	int rrb;
-	int min;
+	int	rrb;
+	int	min;
 
 	rra = stacklen(stack_a) - ra;
 	rrb = stacklen(stack_b) - rb;

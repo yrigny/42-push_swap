@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_3.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/03 23:35:19 by yrigny            #+#    #+#             */
+/*   Updated: 2024/01/03 23:38:48 by yrigny           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	cost_optimize(t_cost *cost, int mincost, int rra, int rrb)
@@ -10,7 +22,7 @@ void	cost_optimize(t_cost *cost, int mincost, int rra, int rrb)
 		else
 			cost->times_rb -= cost->times_rr;
 	}
-	else if (max2(rra, rrb) == mincost) // rra + rrb is the fastest
+	else if (max2(rra, rrb) == mincost)
 	{
 		cost->times_ra = 0;
 		cost->times_rb = 0;
@@ -20,51 +32,51 @@ void	cost_optimize(t_cost *cost, int mincost, int rra, int rrb)
 		else
 			cost->times_rrb -= cost->times_rrr;
 	}
-	else if (cost->times_ra + rrb == mincost) // ra + rrb is the fastest
+	else if (cost->times_ra + rrb == mincost)
 	{
 		cost->times_rb = 0;
 		cost->times_rrb = rrb;
 	}
-	else // rra + rb is the fastest
+	else
 	{
 		cost->times_ra = 0;
 		cost->times_rra = rra;
 	}
 }
 
-void    sort_three(t_list **stack, int stacksize)
+void	sort_three(t_list **stack, int stacksize)
 {
-    if (stacksize == 2)
-    {
-        sa(stack);
-        return ;
-    }
-    if ((*stack)->idx < (*stack)->next->idx && (*stack)->idx < ft_lstlast(*stack)->idx)
-    {
-        sa(stack);
-        ra(stack);
-    }
-    if ((*stack)->idx > (*stack)->next->idx && (*stack)->idx < ft_lstlast(*stack)->idx)
-        sa(stack);
-    if ((*stack)->idx < (*stack)->next->idx && (*stack)->idx > ft_lstlast(*stack)->idx)
-        rra(stack);
-    if ((*stack)->idx > (*stack)->next->idx && (*stack)->idx > ft_lstlast(*stack)->idx)
-    {
-        ra(stack);
-        if (!order_ok(*stack))
-            sa(stack);
-    }
+	if (stacksize == 2)
+	{
+		sa(stack);
+		return ;
+	}
+	if ((*stack)->idx < (*stack)->next->idx && (*stack)->idx < ft_lstlast(*stack)->idx)
+	{
+		sa(stack);
+		ra(stack);
+	}
+	if ((*stack)->idx > (*stack)->next->idx && (*stack)->idx < ft_lstlast(*stack)->idx)
+		sa(stack);
+	if ((*stack)->idx < (*stack)->next->idx && (*stack)->idx > ft_lstlast(*stack)->idx)
+		rra(stack);
+	if ((*stack)->idx > (*stack)->next->idx && (*stack)->idx > ft_lstlast(*stack)->idx)
+	{
+		ra(stack);
+		if (!order_ok(*stack))
+			sa(stack);
+	}
 }
 
-bool    order_ok(t_list *stack)
+bool	order_ok(t_list *stack)
 {
-    if (stack->next == NULL)
-        return (1);
-    while (stack && stack->next)
-    {
-        if (stack->idx > stack->next->idx)
-            return (0);
-        stack = stack->next;
-    }
-    return (1);
+	if (stack->next == NULL)
+		return (1);
+	while (stack && stack->next)
+	{
+		if (stack->idx > stack->next->idx)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
 }

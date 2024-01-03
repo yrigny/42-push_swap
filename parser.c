@@ -27,7 +27,7 @@ bool	numeric(char *ar)
 			return (0);
 		i++;
 	}
-	if (i == 0 || i > 11) // empty argument or beyond int limits
+	if (i == 0 || i > 11)
 		return (0);
 	return (1);
 }

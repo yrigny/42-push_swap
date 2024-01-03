@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sorter.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/03 23:36:21 by yrigny            #+#    #+#             */
+/*   Updated: 2024/01/03 23:39:43 by yrigny           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	sorter(t_list **stack_a, int stacksize)
@@ -10,7 +22,7 @@ void	sorter(t_list **stack_a, int stacksize)
 		return ;
 	else if (stacksize == 2 || stacksize == 3)
 		sort_three(stack_a, stacksize);
-	else // size >= 4
+	else
 	{
 		push(stack_a, &stack_b);
 		push(stack_a, &stack_b);
@@ -28,7 +40,7 @@ void	sorter(t_list **stack_a, int stacksize)
 
 void	b_to_a(t_list **stack_a, t_list **stack_b)
 {
-	
+
 }
 
 void	a_to_b(t_list **stack_a, t_list **stack_b, int *b_min, int *b_max)
@@ -81,7 +93,8 @@ t_cost	get_cheapest(t_list *stack_a, t_list *stack_b, int b_min, int b_max)
 		stack_a = stack_a->next;
 		ra_needed++;
 	}
-	cost_optimize(&cost, mincost, stacklen(stack_a) - cost.times_ra, stacklen(stack_b) - cost.times_rb);
+	cost_optimize(&cost, mincost, stacklen(stack_a) - cost.times_ra,
+			stacklen(stack_b) - cost.times_rb);
 	return (cost);
 }
 
@@ -101,9 +114,11 @@ int	get_rb_needed(t_list *stack_a, t_list *stack_b, int b_min, int b_max)
 	}
 	while (stack_b)
 	{
-		if (stack_a->idx > stack_b->idx && !stack_b->last && stack_a->idx < ft_lstlast(stack_b)->idx)
+		if (stack_a->idx > stack_b->idx && !stack_b->last &&
+				stack_a->idx < ft_lstlast(stack_b)->idx)
 			break ;
-		if (stack_a->idx > stack_b->idx && stack_b->last && stack_a->idx < stack_b->last->idx)
+		if (stack_a->idx > stack_b->idx && stack_b->last &&
+				stack_a->idx < stack_b->last->idx)
 			break ;
 		rb_needed++;
 		stack_b = stack_b->next;
