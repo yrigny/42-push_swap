@@ -43,3 +43,47 @@ void	rotate_down(t_list **stack)
 	(*stack)->last = NULL;
 	ft_lstlast(*stack)->next = NULL;
 }
+
+void	sa(t_list **stack_a)
+{
+	swap(stack_a);
+	printf("sa\n");
+}
+
+void	rr(t_list **stack_a, t_list **stack_b)
+{
+	rotate_up(stack_a);
+	rotate_up(stack_b);
+	printf("rr\n");
+}
+
+void	ra(t_list **stack_a)
+{
+	rotate_up(stack_a);
+	printf("ra\n");
+}
+
+void	rb(t_list **stack_b)
+{
+	rotate_up(stack_b);
+	printf("rb\n");
+}
+
+void	rrr(t_list **stack_a, t_list **stack_b)
+{
+	rotate_down(stack_a);
+	rotate_down(stack_b);
+	printf("rrr\n");
+}
+
+void	rra(t_list **stack_a)
+{
+	rotate_down(stack_a);
+	printf("rra\n");
+}
+
+void	rrb(t_list **stack_b)
+{
+	rotate_down(stack_b);
+	printf("rrb\n");
+}
