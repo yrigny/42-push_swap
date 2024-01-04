@@ -14,7 +14,7 @@
 
 void	sorter(t_list **stack_a, int stacksize)
 {
-	t_list		*stack_b;
+	t_list		*stack_b = NULL;
 	static int	b_min;
 	static int	b_max;
 
@@ -26,28 +26,53 @@ void	sorter(t_list **stack_a, int stacksize)
 	{
 		push(stack_a, &stack_b);
 		push(stack_a, &stack_b);
-		printf("pb\npb\n");
+		ft_printf("pb\npb\n");
 		b_min = min2(stack_b->data, stack_b->next->data);
 		b_max = max2(stack_b->data, stack_b->next->data);
 		while (stacklen(*stack_a) > 3)
-			a_to_b(stack_a, &stack_b, &b_min, &b_max);
+			a_to_b(stack_a, &stack_b, &b_min, &b_max, stacklen(*stack_a));
+		b_descend(&stack_b, b_max);
 		if (!order_ok(*stack_a))
 			sort_three(stack_a, stacklen(*stack_a));
 		while (stacklen(stack_b) > 0)
 			b_to_a(stack_a, &stack_b);
+		a_ascend(stack_a);
 	}
 }
 
 void	b_to_a(t_list **stack_a, t_list **stack_b)
 {
+	int		rotate;
+	t_list	*tmp;
 
+	rotate = 0;
+	tmp = *stack_a;
+	while (tmp && tmp->idx != (*stack_b)->idx + 1)
+	{
+		rotate++;
+		tmp = tmp->next;
+	}
+	if (rotate != 0 && rotate <= stacklen(*stack_a) - rotate)
+	{
+		while (rotate-- > 0)
+			ra(stack_a);
+	}
+	if (rotate != 0 && rotate > stacklen(*stack_a) - rotate)
+	{
+		rotate = stacklen(*stack_a) - rotate;
+		while (rotate-- > 0)
+			rra(stack_a);
+	}
+	push(stack_b, stack_a);
+	printf("pa\n");
 }
 
-void	a_to_b(t_list **stack_a, t_list **stack_b, int *b_min, int *b_max)
+void	a_to_b(t_list **stack_a, t_list **stack_b, int *b_min, int *b_max, int stacklen_a)
 {
 	t_cost	cost;
 
-	cost = get_cheapest(*stack_a, *stack_b, *b_min, *b_max);
+	cost = get_cheapest(*stack_a, *stack_b, *b_min, *b_max, stacklen_a);
+//	printf("cheap_nb = %d\n", cost.cheap_nb);
 	while (cost.times_rr-- > 0)
 		rr(stack_a, stack_b);
 	while (cost.times_ra-- > 0)
@@ -61,14 +86,14 @@ void	a_to_b(t_list **stack_a, t_list **stack_b, int *b_min, int *b_max)
 	while (cost.times_rrb-- > 0)
 		rrb(stack_b);
 	push(stack_a, stack_b);
-	printf("pb\n");
+	ft_printf("pb\n");
 	if (cost.cheap_nb < *b_min)
 		*b_min = cost.cheap_nb;
 	if (cost.cheap_nb > *b_max)
 		*b_max = cost.cheap_nb;
 }
 
-t_cost	get_cheapest(t_list *stack_a, t_list *stack_b, int b_min, int b_max)
+t_cost	get_cheapest(t_list *stack_a, t_list *stack_b, int b_min, int b_max, int stacklen_a)
 {
 	int		ra_needed;
 	int		rb_needed;
@@ -82,7 +107,7 @@ t_cost	get_cheapest(t_list *stack_a, t_list *stack_b, int b_min, int b_max)
 	while (stack_a)
 	{
 		rb_needed = get_rb_needed(stack_a, stack_b, b_min, b_max);
-		pushcost = get_pushcost(ra_needed, rb_needed, stack_a, stack_b);
+		pushcost = get_pushcost(ra_needed, rb_needed, stacklen_a, stacklen(stack_b));
 		if (mincost < 0 || pushcost < mincost)
 		{
 			mincost = pushcost;
@@ -93,8 +118,7 @@ t_cost	get_cheapest(t_list *stack_a, t_list *stack_b, int b_min, int b_max)
 		stack_a = stack_a->next;
 		ra_needed++;
 	}
-	cost_optimize(&cost, mincost, stacklen(stack_a) - cost.times_ra,
-			stacklen(stack_b) - cost.times_rb);
+	cost_optimize(&cost, mincost, stacklen_a - cost.times_ra, stacklen(stack_b) - cost.times_rb);
 	return (cost);
 }
 
@@ -112,14 +136,13 @@ int	get_rb_needed(t_list *stack_a, t_list *stack_b, int b_min, int b_max)
 		}
 		return (rb_needed);
 	}
-	while (stack_b)
+	if (stack_a->idx > stack_b->idx && stack_a->idx < ft_lstlast(stack_b)->idx)
+		return (rb_needed);
+	rb_needed += 1;
+	while (stack_b && stack_b->next)
 	{
-		if (stack_a->idx > stack_b->idx && !stack_b->last &&
-				stack_a->idx < ft_lstlast(stack_b)->idx)
-			break ;
-		if (stack_a->idx > stack_b->idx && stack_b->last &&
-				stack_a->idx < stack_b->last->idx)
-			break ;
+		if (stack_a->idx > stack_b->next->idx && stack_a->idx < stack_b->idx)
+			break;
 		rb_needed++;
 		stack_b = stack_b->next;
 	}

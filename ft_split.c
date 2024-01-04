@@ -92,7 +92,7 @@ char	**ft_split(char const *s, char c)
 	int		wordcount;
 	char	**dest;
 
-	if (s == NULL)
+	if (!s)
 		return (NULL);
 	wordcount = countwords(s, c);
 	dest = malloc(sizeof(char *) * (wordcount + 1));

@@ -12,90 +12,100 @@
 
 #include "push_swap.h"
 
-void	swap(t_list **stack)
+void    swap(t_list **stack)
 {
-	if (!(*stack) || !(*stack)->next)
+    t_list  *first;
+    t_list  *second;
+
+	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
-	(*stack)->last = (*stack)->next;
-	(*stack)->next = (*stack)->next->next;
-	*stack = (*stack)->last;
-	(*stack)->next = (*stack)->last;
-	(*stack)->last = NULL;
+    first = *stack;
+    second = first->next;
+    first->next = second->next;
+    second->next = first;
+    *stack = second;
 }
 
 void	push(t_list **from, t_list **to)
 {
-	if (!(*from))
+	t_list	*from_newhead;
+
+	if (*from == NULL)
 		return ;
-	(*to)->last = *from;
+	from_newhead = (*from)->next;
 	(*from)->next = *to;
-	*to = (*to)->last;
-	*from = (*from)->next;
-	*from->last = NULL;
+	*to = *from;
+	*from = from_newhead;
 }
 
 void	rotate_up(t_list **stack)
 {
-	if (!(*stack) || !(*stack)->next)
+    t_list  *newhead;
+
+	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
-	(*stack)->last = ft_lstlast(*stack);
-	(*stack)->last->next = *stack;
-	*stack = (*stack)->next;
-	(*stack)->last = NULL;
-	ft_lstlast(*stack)->next = NULL;
+    ft_lstlast(*stack)->next = *stack;
+    newhead = (*stack)->next;
+    (*stack)->next = NULL;
+    *stack = newhead;
 }
 
 void	rotate_down(t_list **stack)
 {
-	if (!(*stack) || !(*stack)->next)
+    t_list  *newhead;
+    t_list  *newtail;
+
+	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
-	(*stack)->last = ft_lstlast(*stack);
-	(*stack)->last->next = *stack;
-	*stack = (*stack)->last;
-	(*stack)->last = NULL;
-	ft_lstlast(*stack)->next = NULL;
+    newhead = ft_lstlast(*stack);
+    ft_lstlast(*stack)->next = *stack;
+    newtail = *stack;
+    while (newtail && newtail->next != newhead)
+        newtail = newtail->next;
+    newtail->next = NULL;
+    *stack = newhead; 
 }
 
 void	sa(t_list **stack_a)
 {
 	swap(stack_a);
-	printf("sa\n");
+	ft_printf("sa\n");
 }
 
 void	rr(t_list **stack_a, t_list **stack_b)
 {
 	rotate_up(stack_a);
 	rotate_up(stack_b);
-	printf("rr\n");
+	ft_printf("rr\n");
 }
 
 void	ra(t_list **stack_a)
 {
 	rotate_up(stack_a);
-	printf("ra\n");
+	ft_printf("ra\n");
 }
 
 void	rb(t_list **stack_b)
 {
 	rotate_up(stack_b);
-	printf("rb\n");
+	ft_printf("rb\n");
 }
 
 void	rrr(t_list **stack_a, t_list **stack_b)
 {
 	rotate_down(stack_a);
 	rotate_down(stack_b);
-	printf("rrr\n");
+	ft_printf("rrr\n");
 }
 
 void	rra(t_list **stack_a)
 {
 	rotate_down(stack_a);
-	printf("rra\n");
+	ft_printf("rra\n");
 }
 
 void	rrb(t_list **stack_b)
 {
 	rotate_down(stack_b);
-	printf("rrb\n");
+	ft_printf("rrb\n");
 }

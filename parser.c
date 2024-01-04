@@ -82,28 +82,30 @@ bool	get_num(char *ar, t_list **stack)
 	new->data = (int)num;
 	new->idx = get_idx((int)num, *stack);
 	new->next = NULL;
-	new->last = ft_lstlast(*stack);
 	if (*stack == NULL)
 		*stack = new;
 	else
-		new->last->next = new;
+		ft_lstlast(*stack)->next = new;
 	return (1);
 }
 
 bool	parser(int argc, char **argv, t_list **stack_a)
 {
-	int	i;
-	int	data_ok;
+	int		i;
+	int		data_ok;
+	char	**arg;
 
-	i = 1;
 	data_ok = 1;
-	if (argc == 2)
-		argv = ft_split(argv[1], ' ');
-	if (argc == 2)
-		i = 0;
-	while (argv[i])
+	if (argc == 2 && !argv[1][0])
+		return (0);
+	else if (argc == 2 && argv[1][0])
+		arg = ft_split(argv[1], ' ');
+	else
+		arg = &argv[1];
+	i = 0;
+	while (arg[i])
 	{
-		if (!get_num(argv[i], stack_a))
+		if (!get_num(arg[i], stack_a))
 		{
 			data_ok = 0;
 			free_stack(stack_a);
@@ -112,6 +114,6 @@ bool	parser(int argc, char **argv, t_list **stack_a)
 		i++;
 	}
 	if (argc == 2)
-		free_argv(argv);
+		free_arg(arg);
 	return (data_ok);
 }
