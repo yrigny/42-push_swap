@@ -44,7 +44,7 @@ void	rotate_up(t_stack **stack)
 
 	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
-	ft_lastn(*stack)->next = *stack;
+	lastnb(*stack)->next = *stack;
 	newhead = (*stack)->next;
 	(*stack)->next = NULL;
 	*stack = newhead;
@@ -57,8 +57,8 @@ void	rotate_down(t_stack **stack)
 
 	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
-	newhead = ft_lastn(*stack);
-	ft_lastn(*stack)->next = *stack;
+	newhead = lastnb(*stack);
+	lastnb(*stack)->next = *stack;
 	newtail = *stack;
 	while (newtail && newtail->next != newhead)
 		newtail = newtail->next;

@@ -27,8 +27,8 @@ void	sorter(t_stack **a, int stacksize)
 		push(a, &b);
 		push(a, &b);
 		ft_printf("pb\npb\n");
-		range_b.min = min2(b->data, b->next->data);
-		range_b.max = max2(b->data, b->next->data);
+		range_b.min = min(b->data, b->next->data);
+		range_b.max = max(b->data, b->next->data);
 		while (stacklen(*a) > 3)
 			a_to_b(a, &b, &range_b, stacklen(*a));
 		b_descend(&b, range_b.max);
@@ -135,7 +135,7 @@ int	get_rb_needed(t_stack *a, t_stack *b, int b_min, int b_max)
 		}
 		return (rb_needed);
 	}
-	if (a->idx > b->idx && a->idx < ft_lastn(b)->idx)
+	if (a->idx > b->idx && a->idx < lastnb(b)->idx)
 		return (rb_needed);
 	rb_needed += 1;
 	while (b && b->next)

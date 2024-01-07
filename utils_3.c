@@ -6,7 +6,7 @@
 /*   By: yifanr <yifanr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 23:35:19 by yrigny            #+#    #+#             */
-/*   Updated: 2024/01/07 22:23:51 by yrigny           ###   ########.fr       */
+/*   Updated: 2024/01/07 22:58:55 by yrigny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	cost_opti(t_cost *cost, int mincost, int rra, int rrb)
 {
-	if (max2(cost->ra, cost->rb) == mincost)
+	if (max(cost->ra, cost->rb) == mincost)
 	{
-		cost->rr = min2(cost->ra, cost->rb);
+		cost->rr = min(cost->ra, cost->rb);
 		cost->ra = cost->ra - cost->rr;
 		cost->rb = cost->rb - cost->rr;
 	}
-	else if (max2(rra, rrb) == mincost)
+	else if (max(rra, rrb) == mincost)
 	{
 		cost->ra = 0;
 		cost->rb = 0;
-		cost->rrr = min2(rra, rrb);
+		cost->rrr = min(rra, rrb);
 		cost->rra = rra - cost->rrr;
 		cost->rrb = rrb - cost->rrr;
 	}
@@ -46,31 +46,27 @@ void	sa(t_stack **a)
 	ft_printf("sa\n");
 }
 
-void	sort_three(t_stack **stack, int stacksize)
+void	sort_three(t_stack **a, int stacksize)
 {
 	if (stacksize == 2)
 	{
-		sa(stack);
+		sa(a);
 		return ;
 	}
-	if ((*stack)->idx < (*stack)->next->idx
-		&& (*stack)->idx < ft_lastn(*stack)->idx)
+	if ((*a)->idx < (*a)->next->idx && (*a)->idx < lastnb(*a)->idx)
 	{
-		sa(stack);
-		ra(stack);
+		sa(a);
+		ra(a);
 	}
-	if ((*stack)->idx > (*stack)->next->idx
-		&& (*stack)->idx < ft_lastn(*stack)->idx)
-		sa(stack);
-	if ((*stack)->idx < (*stack)->next->idx
-		&& (*stack)->idx > ft_lastn(*stack)->idx)
-		rra(stack);
-	if ((*stack)->idx > (*stack)->next->idx
-		&& (*stack)->idx > ft_lastn(*stack)->idx)
+	if ((*a)->idx > (*a)->next->idx && (*a)->idx < lastnb(*a)->idx)
+		sa(a);
+	if ((*a)->idx < (*a)->next->idx && (*a)->idx > lastnb(*a)->idx)
+		rra(a);
+	if ((*a)->idx > (*a)->next->idx && (*a)->idx > lastnb(*a)->idx)
 	{
-		ra(stack);
-		if (!order_ok(*stack))
-			sa(stack);
+		ra(a);
+		if (!order_ok(*a))
+			sa(a);
 	}
 }
 

@@ -34,7 +34,7 @@ long	ft_atol(const char *str)
 	return (sign * num);
 }
 
-int	max2(int a, int b)
+int	max(int a, int b)
 {
 	if (a > b)
 		return (a);
@@ -42,7 +42,7 @@ int	max2(int a, int b)
 		return (b);
 }
 
-int	min2(int a, int b)
+int	min(int a, int b)
 {
 	if (a > b)
 		return (b);
@@ -58,9 +58,9 @@ int	get_cost(int ra, int rb, int len_a, int len_b)
 
 	rra = len_a - ra;
 	rrb = len_b - rb;
-	mincost = max2(ra, rb);
-	if (max2(rra, rrb) < mincost)
-		mincost = max2(rra, rrb);
+	mincost = max(ra, rb);
+	if (max(rra, rrb) < mincost)
+		mincost = max(rra, rrb);
 	if (ra + rrb < mincost)
 		mincost = ra + rrb;
 	if (rra + rb < mincost)

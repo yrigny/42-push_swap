@@ -32,60 +32,60 @@ bool	numeric(char *ar)
 	return (1);
 }
 
-bool	unique(int num, t_stack *stack)
+bool	unique(int nb, t_stack *a)
 {
-	if (stack == NULL)
+	if (a == NULL)
 		return (1);
-	while (stack)
+	while (a)
 	{
-		if (stack->data == num)
+		if (a->data == nb)
 			return (0);
-		stack = stack->next;
+		a = a->next;
 	}
 	return (1);
 }
 
-int	get_idx(int num, t_stack *stack)
+int	get_idx(int nb, t_stack *a)
 {
 	int	idx;
 
 	idx = 1;
-	while (stack)
+	while (a)
 	{
-		if (num == stack->data)
+		if (nb == a->data)
 			return (0);
-		if (num > stack->data)
+		if (nb > a->data)
 			idx++;
-		if (num < stack->data)
-			stack->idx++;
-		stack = stack->next;
+		if (nb < a->data)
+			a->idx++;
+		a = a->next;
 	}
 	return (idx);
 }
 
-bool	get_num(char *ar, t_stack **stack)
+bool	get_nb(char *ar, t_stack **a)
 {
-	long	num;
+	long	nb;
 	t_stack	*new;
 
 	new = NULL;
 	if (!numeric(ar))
 		return (0);
-	num = ft_atol(ar);
-	if (num > INT_MAX || num < INT_MIN)
+	nb = ft_atol(ar);
+	if (nb > INT_MAX || nb < INT_MIN)
 		return (0);
-	if (!unique((int)num, *stack))
+	if (!unique((int)nb, *a))
 		return (0);
 	new = malloc(sizeof(t_stack));
 	if (!new)
 		return (0);
-	new->data = (int)num;
-	new->idx = get_idx((int)num, *stack);
+	new->data = (int)nb;
+	new->idx = get_idx((int)nb, *a);
 	new->next = NULL;
-	if (*stack == NULL)
-		*stack = new;
+	if (*a == NULL)
+		*a = new;
 	else
-		ft_lastn(*stack)->next = new;
+		lastnb(*a)->next = new;
 	return (1);
 }
 
@@ -100,7 +100,7 @@ bool	parser(int argc, char **arg, t_stack **a)
 		data_ok = 0;
 	while (data_ok && arg[i])
 	{
-		if (!get_num(arg[i], a))
+		if (!get_nb(arg[i], a))
 		{
 			data_ok = 0;
 			free_stack(a);

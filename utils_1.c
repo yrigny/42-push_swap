@@ -38,13 +38,13 @@ int	stacklen(t_stack *stack)
 	return (len_stack);
 }
 
-t_stack	*ft_lastn(t_stack *lst)
+t_stack	*lastnb(t_stack *stack)
 {
-	if (!lst)
+	if (!stack)
 		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	while (stack->next)
+		stack = stack->next;
+	return (stack);
 }
 
 void	free_stack(t_stack **stack)

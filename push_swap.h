@@ -46,34 +46,34 @@ typedef struct s_cost
 }		t_cost;
 
 /* parsing */
-int		get_idx(int num, t_stack *stack);
+int		get_idx(int nb, t_stack *a);
 long	ft_atol(const char *str);
+bool	unique(int nb, t_stack *a);
 bool	numeric(char *ar);
+bool	get_nb(char *ar, t_stack **a);
 bool	parser(int argc, char **argv, t_stack **a);
-bool	get_num(char *ar, t_stack **stack);
-bool	unique(int num, t_stack *stack);
 
 /* sorting */
 int		get_rb_needed(t_stack *a, t_stack *b, int b_min, int b_max);
-void	sorter(t_stack **a, int stacksize);
+bool	order_ok(t_stack *stack);
 void	a_to_b(t_stack **a, t_stack **b, t_range *range_b, int len_a);
 void	b_to_a(t_stack **a, t_stack **b);
-void	sort_three(t_stack **stack, int stacksize);
-bool	order_ok(t_stack *stack);
+void	sort_three(t_stack **a, int stacksize);
 void	b_descend(t_stack **b, int b_max);
 void	a_ascend(t_stack **a);
+void	sorter(t_stack **a, int stacksize);
 t_cost	cheapest(t_stack *a, t_stack *b, t_range range_b, int len_a);
 
 /* utils */
 int		stacklen(t_stack *stack);
-int		max2(int a, int b);
-int		min2(int a, int b);
+int		max(int a, int b);
+int		min(int a, int b);
 int		get_cost(int times_ra, int times_rb, int len_a, int len_b);
 void	free_stack(t_stack **stack);
 void	free_arg(char **arg);
 void	cost_init(t_cost *cost);
 void	cost_opti(t_cost *cost, int mincost, int times_rra, int times_rrb);
-t_stack	*ft_lastn(t_stack *lst);
+t_stack	*lastnb(t_stack *stack);
 
 /* movements */
 void	swap(t_stack **stack);
