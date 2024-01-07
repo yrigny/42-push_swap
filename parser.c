@@ -6,7 +6,7 @@
 /*   By: yifanr <yifanr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 10:06:24 by yrigny            #+#    #+#             */
-/*   Updated: 2024/01/05 18:26:42 by yifanr           ###   ########.fr       */
+/*   Updated: 2024/01/07 22:21:49 by yrigny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ bool	numeric(char *ar)
 	return (1);
 }
 
-bool	unique(int num, t_list *stack)
+bool	unique(int num, t_stack *stack)
 {
 	if (stack == NULL)
 		return (1);
@@ -45,7 +45,7 @@ bool	unique(int num, t_list *stack)
 	return (1);
 }
 
-int	get_idx(int num, t_list *stack)
+int	get_idx(int num, t_stack *stack)
 {
 	int	idx;
 
@@ -63,20 +63,20 @@ int	get_idx(int num, t_list *stack)
 	return (idx);
 }
 
-bool	get_num(char *ar, t_list **stack)
+bool	get_num(char *ar, t_stack **stack)
 {
 	long	num;
-	t_list	*new;
+	t_stack	*new;
 
 	new = NULL;
 	if (!numeric(ar))
 		return (0);
-	num = ft_atoi(ar);
+	num = ft_atol(ar);
 	if (num > INT_MAX || num < INT_MIN)
 		return (0);
 	if (!unique((int)num, *stack))
 		return (0);
-	new = malloc(sizeof(t_list));
+	new = malloc(sizeof(t_stack));
 	if (!new)
 		return (0);
 	new->data = (int)num;
@@ -85,11 +85,11 @@ bool	get_num(char *ar, t_list **stack)
 	if (*stack == NULL)
 		*stack = new;
 	else
-		ft_lstlast(*stack)->next = new;
+		ft_lastn(*stack)->next = new;
 	return (1);
 }
 
-bool	parser(int argc, char **arg, t_list **stack_a)
+bool	parser(int argc, char **arg, t_stack **a)
 {
 	int		i;
 	bool	data_ok;
@@ -100,10 +100,10 @@ bool	parser(int argc, char **arg, t_list **stack_a)
 		data_ok = 0;
 	while (data_ok && arg[i])
 	{
-		if (!get_num(arg[i], stack_a))
+		if (!get_num(arg[i], a))
 		{
 			data_ok = 0;
-			free_stack(stack_a);
+			free_stack(a);
 		}
 		i++;
 	}

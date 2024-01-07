@@ -1,53 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:24:00 by yrigny            #+#    #+#             */
-/*   Updated: 2023/12/20 15:59:49 by yrigny           ###   ########.fr       */
+/*   Updated: 2024/01/07 22:23:10 by yrigny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-bool	ft_strchr(const char *s, char c)
+bool	order_ok(t_stack *stack)
 {
-	while (*s)
-	{
-		if (*s == (const char)c)
-			return (1);
-		s++;
-	}
-	if (*s == (const char)c)
+	if (stack->next == NULL)
 		return (1);
-	return (0);
+	while (stack && stack->next)
+	{
+		if (stack->idx > stack->next->idx)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
 }
 
-long	ft_atoi(const char *str)
+int	stacklen(t_stack *stack)
 {
-	int		i;
-	int		sign;
-	long	num;
+	int	len_stack;
 
-	i = 0;
-	sign = 1;
-	num = 0;
-	if (str[i] == '-')
+	len_stack = 0;
+	while (stack)
 	{
-		sign = -1;
-		i++;
+		len_stack++;
+		stack = stack->next;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		num = num * 10 + str[i] - '0';
-		i++;
-	}
-	return (sign * num);
+	return (len_stack);
 }
 
-t_list	*ft_lstlast(t_list *lst)
+t_stack	*ft_lastn(t_stack *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -56,9 +47,9 @@ t_list	*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-void	free_stack(t_list **stack)
+void	free_stack(t_stack **stack)
 {
-	t_list	*tmp;
+	t_stack	*tmp;
 
 	tmp = NULL;
 	if (stack == NULL || *stack == NULL)
