@@ -6,7 +6,7 @@
 /*   By: yifanr <yifanr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 23:36:21 by yrigny            #+#    #+#             */
-/*   Updated: 2024/01/05 02:55:46 by yifanr           ###   ########.fr       */
+/*   Updated: 2024/01/07 03:13:15 by yifanr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	sorter(t_list **stack_a, int stacksize)
 	static int	b_min;
 	static int	b_max;
 
+	stack_b = NULL;
 	if (stacksize == 1 || (stacksize > 1 && order_ok(*stack_a)))
 		return ;
 	else if (stacksize == 2 || stacksize == 3)
@@ -30,8 +31,7 @@ void	sorter(t_list **stack_a, int stacksize)
 		b_min = min2(stack_b->data, stack_b->next->data);
 		b_max = max2(stack_b->data, stack_b->next->data);
 		while (stacklen(*stack_a) > 3)
-			a_to_b(stack_a, &stack_b, &b_min, &b_max,
-stacklen(*stack_a));
+			a_to_b(stack_a, &stack_b, &b_min, &b_max, stacklen(*stack_a));
 		b_descend(&stack_b, b_max);
 		if (!order_ok(*stack_a))
 			sort_three(stack_a, stacklen(*stack_a));
@@ -118,8 +118,7 @@ t_cost	get_cheapest(t_list *stack_a, t_list *stack_b, int b_min, int b_max, int 
 		stack_a = stack_a->next;
 		ra_needed++;
 	}
-	cost_optimize(&cost, mincost, stacklen_a - cost.times_ra,
-stacklen(stack_b) - cost.times_rb);
+	cost_optimize(&cost, mincost, stacklen_a - cost.times_ra, stacklen(stack_b) - cost.times_rb);
 	return (cost);
 }
 

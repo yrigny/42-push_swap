@@ -6,7 +6,7 @@
 /*   By: yifanr <yifanr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 23:35:58 by yrigny            #+#    #+#             */
-/*   Updated: 2024/01/05 17:50:18 by yifanr           ###   ########.fr       */
+/*   Updated: 2024/01/07 03:14:37 by yifanr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
-
 /*
 void	print_stack(t_list *stack)
 {
@@ -30,8 +29,8 @@ void	print_stack(t_list *stack)
 		ft_printf("%d\n", stack->data);
 		stack = stack->next;
 	}
-}
-*/
+}*/
+
 int	main(int argc, char **argv)
 {
 	t_list	*stack_a;
