@@ -1,32 +1,48 @@
 CC	= cc
+
 CFLAGS	= -Wall -Wextra -Werror
-TARGET	= push_swap
+
+NAME	= push_swap
+
+NAME_B	= checker
+
 HEADER	= push_swap.h
 
-SRC		= main.c \
-			parser.c \
-			sorter.c \
-			ft_split.c \
-			movements.c \
-			utils_1.c \
-			utils_2.c \
-			utils_3.c \
-			ft_printf.c \
-			fprinter_1.c \
-			fprinter_2.c
-OBJ		= $(SRC:.c=.o)
+SRC	= main.c \
+		parser.c \
+		sorter.c \
+		movements_1.c \
+		movements_2.c \
+		utils_1.c \
+		utils_2.c \
+		utils_3.c \
 
-all: $(TARGET)
+SRC_B	= 
 
-$(TARGET): $(SRC) $(HEADER)
-	$(CC) $(CFLAGS) $(SRC) -o $(TARGET)
+LIB_DIR	= ./libft
+
+LIBFT	= $(LIB_DIR)/libft.a
+
+libft:
+	$(MAKE) -C $(LIB_DIR)
+
+$(LIBFT): libft
+
+all: $(LIBFT) $(NAME)
+
+$(NAME): $(SRC) $(HEADER) $(LIBFT)
+	$(CC) $(CFLAGS) $(SRC) -o $(NAME) -L$(LIB_DIR) -lft
+
+bonus: all
+	$(CC) $(CFLAGS) $(SRC_B) -o $(NAME_B) -L$(LIB_DIR) -lft
 
 clean:
-	rm -f $(TARGET)
+	$(MAKE) -C $(LIB_DIR) clean
 
-fclean: clean
-	rm -f $(TARGET)
+fclean:
+	$(MAKE) -C $(LIB_DIR) fclean
+	rm -f $(NAME)
 
-re:		fclean all
+re: fclean all
 
-.PHONY:	all clean fclean re
+.PHONY:	all bonus libft clean fclean re
