@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: yifanr <yifanr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 10:06:20 by yrigny            #+#    #+#             */
-/*   Updated: 2023/12/20 16:04:34 by yrigny           ###   ########.fr       */
+/*   Updated: 2024/01/05 01:27:27 by yifanr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ void	a_to_b(t_list **stack_a, t_list **stack_b, int *b_min, int *b_max, int stac
 void	sort_three(t_list **stack_a, int stacksize);
 void	b_to_a(t_list **stack_a, t_list **stack_b);
 t_cost	get_cheapest(t_list *stack_a, t_list *stack_b, int b_min, int b_max, int stacklen_a);
-int		get_rb_needed(t_list *stack_a, t_list *stack_b, int b_min, int b_max);
+int		get_rb_needed(t_list *a, t_list *b, int b_min, int b_max);
 void	sort_three(t_list **stack, int stacksize);
 bool	order_ok(t_list *stack);
 void	b_descend(t_list **stack_b, int b_max);
 void	a_ascend(t_list **stack_a);
 
 /* utils */
+void	print_stack(t_list *stack);
 size_t	ft_strlen(const char *s);
 bool	ft_strchr(const char *s, char c);
 t_list	*ft_lstlast(t_list *lst);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: yifanr <yifanr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 23:35:19 by yrigny            #+#    #+#             */
-/*   Updated: 2024/01/03 23:38:48 by yrigny           ###   ########.fr       */
+/*   Updated: 2024/01/05 01:59:37 by yifanr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,16 @@ void	cost_optimize(t_cost *cost, int mincost, int times_rra, int times_rrb)
 	if (max2(cost->times_ra, cost->times_rb) == mincost)
 	{
 		cost->times_rr = min2(cost->times_ra, cost->times_rb);
-		if (cost->times_ra >= cost->times_rb)
-			cost->times_ra -= cost->times_rr;
-		else
-			cost->times_rb -= cost->times_rr;
+		cost->times_ra = cost->times_ra - cost->times_rr;
+		cost->times_rb = cost->times_rb - cost->times_rr;
 	}
 	else if (max2(times_rra, times_rrb) == mincost)
 	{
 		cost->times_ra = 0;
 		cost->times_rb = 0;
 		cost->times_rrr = min2(times_rra, times_rrb);
-		if (times_rra >= times_rrb)
-			cost->times_rra -= cost->times_rrr;
-		else
-			cost->times_rrb -= cost->times_rrr;
+		cost->times_rra = times_rra - cost->times_rrr;
+		cost->times_rrb = times_rrb - cost->times_rrr;
 	}
 	else if (cost->times_ra + times_rrb == mincost)
 	{
@@ -51,16 +47,20 @@ void	sort_three(t_list **stack, int stacksize)
 		sa(stack);
 		return ;
 	}
-	if ((*stack)->idx < (*stack)->next->idx && (*stack)->idx < ft_lstlast(*stack)->idx)
+	if ((*stack)->idx < (*stack)->next->idx
+		&& (*stack)->idx < ft_lstlast(*stack)->idx)
 	{
 		sa(stack);
 		ra(stack);
 	}
-	if ((*stack)->idx > (*stack)->next->idx && (*stack)->idx < ft_lstlast(*stack)->idx)
+	if ((*stack)->idx > (*stack)->next->idx
+		&& (*stack)->idx < ft_lstlast(*stack)->idx)
 		sa(stack);
-	if ((*stack)->idx < (*stack)->next->idx && (*stack)->idx > ft_lstlast(*stack)->idx)
+	if ((*stack)->idx < (*stack)->next->idx
+		&& (*stack)->idx > ft_lstlast(*stack)->idx)
 		rra(stack);
-	if ((*stack)->idx > (*stack)->next->idx && (*stack)->idx > ft_lstlast(*stack)->idx)
+	if ((*stack)->idx > (*stack)->next->idx
+		&& (*stack)->idx > ft_lstlast(*stack)->idx)
 	{
 		ra(stack);
 		if (!order_ok(*stack))
@@ -132,5 +132,5 @@ void	a_ascend(t_list **stack_a)
 		rotate = stacklen(*stack_a) - rotate;
 		while (rotate-- > 0)
 			rra(stack_a);
-	}	
+	}
 }

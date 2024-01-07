@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: yifanr <yifanr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/03 23:36:07 by yrigny            #+#    #+#             */
-/*   Updated: 2024/01/03 23:36:09 by yrigny           ###   ########.fr       */
+/*   Created: 2024/01/05 23:11:48 by yifanr            #+#    #+#             */
+/*   Updated: 2024/01/05 23:11:59 by yifanr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    swap(t_list **stack)
+void	swap(t_list **stack)
 {
-    t_list  *first;
-    t_list  *second;
+	t_list	*first;
+	t_list	*second;
 
 	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
-    first = *stack;
-    second = first->next;
-    first->next = second->next;
-    second->next = first;
-    *stack = second;
+	first = *stack;
+	second = first->next;
+	first->next = second->next;
+	second->next = first;
+	*stack = second;
 }
 
 void	push(t_list **from, t_list **to)
@@ -40,30 +40,30 @@ void	push(t_list **from, t_list **to)
 
 void	rotate_up(t_list **stack)
 {
-    t_list  *newhead;
+	t_list	*newhead;
 
 	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
-    ft_lstlast(*stack)->next = *stack;
-    newhead = (*stack)->next;
-    (*stack)->next = NULL;
-    *stack = newhead;
+	ft_lstlast(*stack)->next = *stack;
+	newhead = (*stack)->next;
+	(*stack)->next = NULL;
+	*stack = newhead;
 }
 
 void	rotate_down(t_list **stack)
 {
-    t_list  *newhead;
-    t_list  *newtail;
+	t_list	*newhead;
+	t_list	*newtail;
 
 	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
-    newhead = ft_lstlast(*stack);
-    ft_lstlast(*stack)->next = *stack;
-    newtail = *stack;
-    while (newtail && newtail->next != newhead)
-        newtail = newtail->next;
-    newtail->next = NULL;
-    *stack = newhead; 
+	newhead = ft_lstlast(*stack);
+	ft_lstlast(*stack)->next = *stack;
+	newtail = *stack;
+	while (newtail && newtail->next != newhead)
+		newtail = newtail->next;
+	newtail->next = NULL;
+	*stack = newhead;
 }
 
 void	sa(t_list **stack_a)

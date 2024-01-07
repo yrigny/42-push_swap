@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: yifanr <yifanr@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 10:06:24 by yrigny            #+#    #+#             */
-/*   Updated: 2023/12/20 16:07:08 by yrigny           ###   ########.fr       */
+/*   Updated: 2024/01/05 18:26:42 by yifanr           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ bool	numeric(char *ar)
 	{
 		if (!ft_strchr("0123456789", ar[i]))
 			return (0);
-		if (ar[i] == '0' && ar[i + 1])
-			return (0);
 		i++;
 	}
 	if (i == 0 || i > 11)
+		return (0);
+	if (ar[0] == '0' && ar[1])
 		return (0);
 	return (1);
 }
@@ -89,27 +89,21 @@ bool	get_num(char *ar, t_list **stack)
 	return (1);
 }
 
-bool	parser(int argc, char **argv, t_list **stack_a)
+bool	parser(int argc, char **arg, t_list **stack_a)
 {
 	int		i;
-	int		data_ok;
-	char	**arg;
+	bool	data_ok;
 
-	data_ok = 1;
-	if (argc == 2 && !argv[1][0])
-		return (0);
-	else if (argc == 2 && argv[1][0])
-		arg = ft_split(argv[1], ' ');
-	else
-		arg = &argv[1];
 	i = 0;
-	while (arg[i])
+	data_ok = 1;
+	if (!(*arg))
+		data_ok = 0;
+	while (data_ok && arg[i])
 	{
 		if (!get_num(arg[i], stack_a))
 		{
 			data_ok = 0;
 			free_stack(stack_a);
-			break ;
 		}
 		i++;
 	}
