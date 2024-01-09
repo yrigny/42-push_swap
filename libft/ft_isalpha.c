@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 19:22:16 by yrigny            #+#    #+#             */
-/*   Updated: 2024/01/08 19:22:19 by yrigny           ###   ########.fr       */
+/*   Created: 2023/11/06 16:33:07 by yrigny            #+#    #+#             */
+/*   Updated: 2023/11/06 17:18:10 by yrigny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_isalpha(int c)
 {
-	t_stack	*a;
-	char	**arg;
-
-	a = NULL;
-	arg = NULL;
-	if (argc < 2)
-		return (0);
-	else if (argc == 2)
-		arg = ft_split(argv[1], ' ');
-	else
-		arg = &argv[1];
-	if (!parser(argc, arg, &a))
-		ft_putstr_fd("Error\n", 2);
-	else
-	{
-		sorter(&a, stacklen(a));
-		free_stack(&a);
-	}
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
 	return (0);
 }
+/*
+int	main(void)
+{
+	int c = 'g';
+	printf("isalpha result: %d\n", isalpha(c));
+	printf("ft_isalpha result: %d\n", ft_isalpha(c));
+	return 0;
+}*/

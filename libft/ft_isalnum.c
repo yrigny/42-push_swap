@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 19:22:16 by yrigny            #+#    #+#             */
-/*   Updated: 2024/01/08 19:22:19 by yrigny           ###   ########.fr       */
+/*   Created: 2023/11/06 17:56:27 by yrigny            #+#    #+#             */
+/*   Updated: 2023/11/06 17:56:29 by yrigny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_isalnum(int c)
 {
-	t_stack	*a;
-	char	**arg;
-
-	a = NULL;
-	arg = NULL;
-	if (argc < 2)
-		return (0);
-	else if (argc == 2)
-		arg = ft_split(argv[1], ' ');
-	else
-		arg = &argv[1];
-	if (!parser(argc, arg, &a))
-		ft_putstr_fd("Error\n", 2);
-	else
-	{
-		sorter(&a, stacklen(a));
-		free_stack(&a);
-	}
+	if ((c >= 48 && c <= 57) || (c > 64 && c < 91) || (c > 96 && c < 123))
+		return (1);
 	return (0);
 }
+/*
+int	main(void)
+{
+	int c = '?';
+	if (isalnum(c))
+		printf("isalnum result: is alnum\n");
+	else
+		printf("isalnum result: is not alnum\n");
+	if (ft_isalnum(c))
+		printf("ft_isalnum result: is alnum\n");
+	else
+		printf("ft_isalnum result: is not alnum\n");
+	return 0;
+}*/

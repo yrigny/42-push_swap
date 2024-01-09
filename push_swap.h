@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yifanr <yifanr@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/18 10:06:20 by yrigny            #+#    #+#             */
-/*   Updated: 2024/01/07 22:22:14 by yrigny           ###   ########.fr       */
+/*   Created: 2024/01/08 19:23:55 by yrigny            #+#    #+#             */
+/*   Updated: 2024/01/08 19:23:57 by yrigny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 
 # define PUSH_SWAP_H
-# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdbool.h>

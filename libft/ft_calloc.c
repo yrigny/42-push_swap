@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 19:22:16 by yrigny            #+#    #+#             */
-/*   Updated: 2024/01/08 19:22:19 by yrigny           ###   ########.fr       */
+/*   Created: 2023/11/10 16:11:43 by yrigny            #+#    #+#             */
+/*   Updated: 2023/11/10 16:11:47 by yrigny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	t_stack	*a;
-	char	**arg;
+	void	*ptr;
 
-	a = NULL;
-	arg = NULL;
-	if (argc < 2)
-		return (0);
-	else if (argc == 2)
-		arg = ft_split(argv[1], ' ');
-	else
-		arg = &argv[1];
-	if (!parser(argc, arg, &a))
-		ft_putstr_fd("Error\n", 2);
-	else
-	{
-		sorter(&a, stacklen(a));
-		free_stack(&a);
-	}
-	return (0);
+	ptr = NULL;
+	if (size != 0 && nmemb > (size_t)(-1) / size)
+		return (NULL);
+	ptr = malloc(nmemb * size);
+	if (ptr)
+		ft_bzero(ptr, nmemb * size);
+	return (ptr);
 }

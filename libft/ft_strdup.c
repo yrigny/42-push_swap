@@ -1,36 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 19:22:16 by yrigny            #+#    #+#             */
-/*   Updated: 2024/01/08 19:22:19 by yrigny           ###   ########.fr       */
+/*   Created: 2023/11/10 17:05:20 by yrigny            #+#    #+#             */
+/*   Updated: 2023/11/10 17:05:23 by yrigny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_strdup(const char *s)
 {
-	t_stack	*a;
-	char	**arg;
+	size_t	len;
+	char	*dup;
 
-	a = NULL;
-	arg = NULL;
-	if (argc < 2)
+	len = 0;
+	while (s[len])
+		len++;
+	dup = (char *)malloc(sizeof(char) *(len + 1));
+	if (!dup)
 		return (0);
-	else if (argc == 2)
-		arg = ft_split(argv[1], ' ');
-	else
-		arg = &argv[1];
-	if (!parser(argc, arg, &a))
-		ft_putstr_fd("Error\n", 2);
+	return (ft_memcpy(dup, s, len + 1));
+}
+/*
+int	main(void)
+{
+	char	*src;
+	char	*dup;
+
+	src = "";
+	dup = ft_strdup(src);
+	if (dup == 0)
+	{
+		printf("duplication failed\n");
+		free(dup);
+		return (1);
+	}
 	else
 	{
-		sorter(&a, stacklen(a));
-		free_stack(&a);
+		printf("dup result:\n%s", dup);
+		free(dup);
+		return (0);
 	}
-	return (0);
-}
+}*/

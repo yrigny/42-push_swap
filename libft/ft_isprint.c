@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 19:22:16 by yrigny            #+#    #+#             */
-/*   Updated: 2024/01/08 19:22:19 by yrigny           ###   ########.fr       */
+/*   Created: 2023/11/07 10:46:10 by yrigny            #+#    #+#             */
+/*   Updated: 2023/11/07 10:49:41 by yrigny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_isprint(int c)
 {
-	t_stack	*a;
-	char	**arg;
-
-	a = NULL;
-	arg = NULL;
-	if (argc < 2)
-		return (0);
-	else if (argc == 2)
-		arg = ft_split(argv[1], ' ');
-	else
-		arg = &argv[1];
-	if (!parser(argc, arg, &a))
-		ft_putstr_fd("Error\n", 2);
-	else
-	{
-		sorter(&a, stacklen(a));
-		free_stack(&a);
-	}
-	return (0);
+	return (c >= 32 && c <= 126);
 }
+/*
+int	main(void)
+{
+	int c = 32;
+	if (isprint(c))
+		printf("isprint result: is printable\n");
+	else
+		printf("isprint result: is not printable\n");
+	if (ft_isprint(c))
+		printf("ft_isprint result: is printable\n");
+	else
+		printf("ft_isprint result: is not printable\n");
+	return 0;
+}*/

@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 19:22:16 by yrigny            #+#    #+#             */
-/*   Updated: 2024/01/08 19:22:19 by yrigny           ###   ########.fr       */
+/*   Created: 2023/11/07 10:53:05 by yrigny            #+#    #+#             */
+/*   Updated: 2023/11/07 10:53:11 by yrigny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+/*
 int	main(int argc, char **argv)
 {
-	t_stack	*a;
-	char	**arg;
-
-	a = NULL;
-	arg = NULL;
-	if (argc < 2)
-		return (0);
-	else if (argc == 2)
-		arg = ft_split(argv[1], ' ');
-	else
-		arg = &argv[1];
-	if (!parser(argc, arg, &a))
-		ft_putstr_fd("Error\n", 2);
-	else
-	{
-		sorter(&a, stacklen(a));
-		free_stack(&a);
-	}
-	return (0);
-}
+	if (argc != 2)
+		return 0;
+	printf("strlen result: %lu\n", strlen(argv[1]));
+	printf("ft_strlen result: %zu\n", ft_strlen(argv[1]));
+	return 0;
+}*/

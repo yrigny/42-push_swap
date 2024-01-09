@@ -1,4 +1,4 @@
-CC	= cc
+CC		= cc
 
 CFLAGS	= -Wall -Wextra -Werror
 
@@ -6,9 +6,11 @@ NAME	= push_swap
 
 NAME_B	= checker
 
-HEADER	= push_swap.h
+INC		= push_swap.h
 
-SRC	= main.c \
+INC_B	= push_swap_bonus.h
+
+SRC		= main.c \
 		parser.c \
 		sorter.c \
 		movements_1.c \
@@ -17,31 +19,35 @@ SRC	= main.c \
 		utils_2.c \
 		utils_3.c \
 
-SRC_B	= 
+SRC_B	= main_bonus.c \
+		parser_bonus.c \
+		movements_bonus.c \
+		utils_bonus.c
 
 LIB_DIR	= ./libft
 
 LIBFT	= $(LIB_DIR)/libft.a
 
 libft:
-	$(MAKE) -C $(LIB_DIR)
+	make -C $(LIB_DIR)
 
 $(LIBFT): libft
 
 all: $(LIBFT) $(NAME)
 
-$(NAME): $(SRC) $(HEADER) $(LIBFT)
+$(NAME): $(INC) $(LIBFT)
 	$(CC) $(CFLAGS) $(SRC) -o $(NAME) -L$(LIB_DIR) -lft
 
-bonus: all
+bonus: all $(INC_B)
 	$(CC) $(CFLAGS) $(SRC_B) -o $(NAME_B) -L$(LIB_DIR) -lft
 
 clean:
-	$(MAKE) -C $(LIB_DIR) clean
+	make clean -C $(LIB_DIR)
 
 fclean:
-	$(MAKE) -C $(LIB_DIR) fclean
+	make fclean -C $(LIB_DIR)
 	rm -f $(NAME)
+	rm -f $(NAME_B)
 
 re: fclean all
 

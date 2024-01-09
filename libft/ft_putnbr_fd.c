@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yrigny <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/08 19:22:16 by yrigny            #+#    #+#             */
-/*   Updated: 2024/01/08 19:22:19 by yrigny           ###   ########.fr       */
+/*   Created: 2023/11/14 15:02:07 by yrigny            #+#    #+#             */
+/*   Updated: 2023/11/14 16:18:54 by yrigny           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	ft_putnbr_fd(int n, int fd)
 {
-	t_stack	*a;
-	char	**arg;
-
-	a = NULL;
-	arg = NULL;
-	if (argc < 2)
-		return (0);
-	else if (argc == 2)
-		arg = ft_split(argv[1], ' ');
-	else
-		arg = &argv[1];
-	if (!parser(argc, arg, &a))
-		ft_putstr_fd("Error\n", 2);
-	else
+	if (n <= -10 || n >= 10)
 	{
-		sorter(&a, stacklen(a));
-		free_stack(&a);
+		ft_putnbr_fd(n / 10, fd);
+		if (n < 0)
+			ft_putchar_fd(-(n % 10) + '0', fd);
+		else
+			ft_putchar_fd(n % 10 + '0', fd);
 	}
-	return (0);
+	else if (n < 0 && n > -10)
+	{
+		ft_putchar_fd('-', fd);
+		ft_putchar_fd(-n + '0', fd);
+	}
+	else
+		ft_putchar_fd(n + '0', fd);
 }
